@@ -18,32 +18,42 @@
 ### Setup
 
 ```bash
-# clone, install dependencies, whatever applies to this project's stack
+make setup
+# or, without make: clone, install dependencies per this project's stack
 ```
 
 ### Running
 
 ```bash
-# how to run the project locally
+make dev
 ```
 
 ### Testing
 
 ```bash
-# how to run the test suite
+make test
 ```
+
+A [devcontainer](.devcontainer/devcontainer.json) is available for a reproducible environment (VS Code / GitHub Codespaces); tool versions are pinned in [.mise.toml](.mise.toml).
 
 ## Project structure
 
 ```
 .
-├── .github/          # CI workflows, issue/PR templates, CODEOWNERS
-├── docs/              # project documentation
-│   ├── adr/           # architecture decision records
-│   └── ai/            # instructions and context for AI coding agents
-├── src/                # application/library source (create per-language)
-├── tests/              # test suite (create per-language)
-├── CLAUDE.md           # instructions for Claude Code and other AI agents
+├── .claude/            # Claude Code settings (permissions)
+├── .devcontainer/      # reproducible dev environment
+├── .github/             # CI workflows, issue/PR templates, CODEOWNERS
+├── docs/                 # project documentation
+│   ├── adr/               # architecture decision records
+│   ├── ai/                 # instructions and context for AI coding agents
+│   ├── DOCUMENTATION_GUIDE.md
+│   └── RUNBOOK.md           # operational playbook (fill in once deployed)
+├── src/                    # application/library source (create per-language)
+├── tests/                   # test suite (create per-language)
+├── CLAUDE.md                # instructions for Claude Code and other AI agents
+├── Makefile                  # stack-agnostic entry points (setup/dev/test/lint/build)
+├── .mise.toml                 # pinned tool/runtime versions
+├── lefthook.yml                 # git hooks: secret scanning, commit-msg linting
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
 └── LICENSE
@@ -53,6 +63,8 @@
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) — how to propose changes
 - [docs/adr/](docs/adr/) — why key decisions were made
+- [docs/DOCUMENTATION_GUIDE.md](docs/DOCUMENTATION_GUIDE.md) — how feature docs are organized
+- [docs/RUNBOOK.md](docs/RUNBOOK.md) — operating this project once deployed
 - [CLAUDE.md](CLAUDE.md) — how AI agents should work in this repo
 
 ## License

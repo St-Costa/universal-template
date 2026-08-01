@@ -19,8 +19,10 @@ Update `CLAUDE.md` in the same PR whenever you:
 
 ## Structure to preserve
 
-Keep the existing section headers (Project overview, Tech stack, Commands, Conventions, Testing expectations, Git & PR conventions, What not to touch, Architecture notes) so the file stays predictable across projects that use this template. Add sub-sections under them rather than inventing new top-level ones, unless the project genuinely needs a new category.
+Keep the existing section headers (Project overview, Tech stack, Commands, Conventions, Testing expectations, Git & PR conventions, What not to touch, Architecture notes, Documentation, Before considering a task done) so the file stays predictable across projects that use this template. Add sub-sections under them rather than inventing new top-level ones, unless the project genuinely needs a new category.
 
 ## Multiple CLAUDE.md files
 
 For larger projects, nested `CLAUDE.md` files in subdirectories (e.g. `apps/api/CLAUDE.md`) can hold context specific to that area — agents pick up the nearest one plus the root. Only split it out once the root file is genuinely crowded; don't do it preemptively.
+
+See [examples/nested-claude-md-example/CLAUDE.md](examples/nested-claude-md-example/CLAUDE.md) for a worked example of what a good nested file looks like — short, additive, and non-repeating of the root.

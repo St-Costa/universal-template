@@ -29,6 +29,10 @@ This template intentionally ships no language-specific tooling. For your stack:
 - Replace the placeholder job in [.github/workflows/ci.yml](../.github/workflows/ci.yml) with real install/lint/test/build steps.
 - Fill in the `Commands` table in [CLAUDE.md](../CLAUDE.md) and the `Getting started` section in [README.md](../README.md).
 - Uncomment the relevant section of [.gitignore](../.gitignore).
+- Pin real tool versions in [.mise.toml](../.mise.toml) (or delete it if you don't want version pinning).
+- Wire up the placeholder targets in [Makefile](../Makefile) to your real setup/test/lint/build commands — keep them in sync with the `Commands` table in `CLAUDE.md`.
+- Set the base image and `postCreateCommand` in [.devcontainer/devcontainer.json](../.devcontainer/devcontainer.json), or delete `.devcontainer/` if you don't want a containerized dev environment.
+- Uncomment and wire up the `lint`/`format` hooks in [lefthook.yml](../lefthook.yml), then run `lefthook install` once per clone to activate git hooks (gitleaks secret-scanning and commitlint are active by default; both need to be installed locally — see their own docs).
 
 ## 3. Fill in CLAUDE.md
 
@@ -53,6 +57,8 @@ Edit [.github/CODEOWNERS](../.github/CODEOWNERS) or delete it if not needed yet.
 - Delete `src/.gitkeep` and `tests/.gitkeep` once real files exist there.
 - Update the README badge URLs once the repo exists on GitHub with CI configured.
 - If you don't need ADRs, delete `docs/adr/` — but consider keeping [ADR 0001](adr/0001-record-architecture-decisions.md) since it explains why the practice exists.
+- Fill in [docs/RUNBOOK.md](RUNBOOK.md) once something is actually deployed — it's placeholder-only until then. Delete it if this project will never be operated as a live service (e.g. a library).
+- Delete `docs/ai/examples/` — it's a worked example, not something meant to ship in a real project.
 
 ## 6. First commit
 

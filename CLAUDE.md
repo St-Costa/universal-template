@@ -49,6 +49,33 @@ Instructions for Claude Code (and other AI coding agents that read this file) wh
 - Run the full test suite before considering a task done; do not just run the one test you wrote.
 - Do not weaken or delete a test to make it pass.
 
+### Testing philosophy: coverage by risk, not by percentage
+
+Write as many tests as are *useful* — which is not the same as as many as possible. Apply the same judgment here you'd apply to production code: more tests are only better when each one earns its place.
+
+**Prioritize tests for:**
+
+- Business logic and domain rules — anything encoding "what the product is supposed to do."
+- Edge cases: empty inputs, boundary values, concurrent access, malformed data from external sources.
+- Every bug fix gets a regression test that fails without the fix and passes with it.
+- Code with non-obvious behavior — anything a future reader (human or agent) could plausibly get wrong when modifying it.
+- Integration points: anywhere this codebase talks to a database, external API, queue, or filesystem, since these are where real bugs hide and unit tests alone won't catch them.
+
+**Deprioritize or skip tests for:**
+
+- Trivial getters/setters, simple pass-through functions, and framework/library code you don't own.
+- Generated code.
+- Restating the implementation in test form (a test that just mirrors the function body line-for-line catches nothing).
+
+**Anti-goals — these count against you, not for you:**
+
+- Padding a coverage number with low-value tests (e.g. asserting a constructor doesn't throw) instead of covering actual risk.
+- One giant test asserting many unrelated things — prefer focused tests with one clear failure reason each.
+- Tests so tightly coupled to implementation details that a harmless refactor breaks them. Test behavior/contracts, not internals.
+- Flaky tests left in place "for coverage." A flaky test is worse than no test — fix it or delete it.
+
+When in doubt about whether a test is worth writing, ask: *if this broke, would an existing test catch it, and would that failure be useful signal?* If not, write it. If a test wouldn't tell you anything you don't already know, skip it.
+
 ## Git & PR conventions
 
 ### Commit automatically, without being asked
@@ -92,6 +119,7 @@ In this repository, committing is part of finishing a unit of work — you do no
 
 - CI/CD workflow files (`.github/workflows/`) — changes here affect every future PR.
 - Anything under `docs/adr/` — these are historical records, not living docs; add a new ADR instead of editing an old one.
+- `.claude/settings.json`, `lefthook.yml`, `.gitleaks.toml`, `commitlint.config.js` — these govern what Claude itself is permitted to do and what gets checked before a commit lands; loosening them is a trust decision for the user to make, not the agent.
 
 ## Architecture notes
 
@@ -102,6 +130,10 @@ See [docs/adr/](docs/adr/) for the reasoning behind major architectural decision
 ## Documentation
 
 When a change needs user-facing or developer-facing documentation (not just code comments), organize it by feature/domain area: `docs/<feature-name>/` rather than by document type. Update docs in the same commit/PR as the code change they describe — don't defer it. See [docs/DOCUMENTATION_GUIDE.md](docs/DOCUMENTATION_GUIDE.md) for the full structure and when a feature earns its own doc vs. a section in an existing one.
+
+## Before considering a task done
+
+Run through [docs/ai/review-checklist.md](docs/ai/review-checklist.md) — it consolidates the checks scattered across this file into one pass.
 
 ## Keeping this file useful
 
