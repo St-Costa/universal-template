@@ -51,7 +51,37 @@ Instructions for Claude Code (and other AI coding agents that read this file) wh
 
 ## Git & PR conventions
 
-- Commit messages: <!-- e.g. Conventional Commits (`feat:`, `fix:`, `chore:`) or plain imperative subject lines -->
+### Commit automatically, without being asked
+
+In this repository, committing is part of finishing a unit of work — you do not need explicit permission to run `git commit`, and you should not wait to be told. This overrides the general default of only committing when asked.
+
+- **When to commit**: after each logically complete, working change — a bug fixed, a feature/sub-feature working, a refactor landed, docs updated to match a code change. Don't commit broken or half-finished work; don't bundle unrelated changes into one commit; don't wait for an entire multi-step task to finish if it contains several independent complete steps along the way.
+- **What to do instead of asking first**: commit, then tell the user what you committed and why, in one line (e.g. "Committed as `abc1234`: fix null check in parser"). Report after, don't ask before.
+- **Scope stays local**: this permission covers local commits only. Never push, force-push, rebase published history, or amend an existing commit without being explicitly asked — those remain confirm-first actions per the repo's normal safety rules.
+- **Staging discipline still applies**: review what's staged before committing (`git status`/`git diff`), stage specific files rather than `git add -A`/`.` when unrelated changes are present, and check for secrets before committing anything that looks like it might contain them.
+- **Exceptions** — do not auto-commit:
+  - Mid-edit or exploratory work that doesn't yet build/pass tests.
+  - Changes to `.github/workflows/`, other CI/CD config, or anything else listed under "What not to touch without asking" below — confirm first even for a commit.
+  - If the user has asked you to hold changes uncommitted (e.g. for their own review before it enters history).
+
+### Commit message format
+
+<!-- Default below is Conventional Commits; replace with the project's actual convention if different. -->
+
+```
+<type>(<scope>): <summary, imperative mood, no trailing period>
+
+<body — optional, wrap ~72 cols, explain *why* not *what*>
+```
+
+- `type`: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`, `style`, `build`, `ci`
+- `scope`: optional, the affected area (module/package/feature name)
+- Summary: imperative ("add", not "added"/"adds"), under ~72 chars, describes the change from the reader's perspective, not the process ("fix off-by-one in pagination", not "fixed bug")
+- Body: only when the summary alone doesn't explain *why* — link an issue/ADR if relevant. Skip it for small, self-explanatory changes.
+- One logical change per commit. If you're using "and" to describe the diff, it's probably two commits.
+
+### Branching and PRs
+
 - Branch naming: <!-- e.g. `feature/short-description`, `fix/short-description` -->
 - Keep PRs scoped to one logical change. Explain *why* in the PR description, not just *what*.
 - Do not commit secrets, credentials, or `.env` files. See `.gitignore`.
@@ -68,6 +98,10 @@ Instructions for Claude Code (and other AI coding agents that read this file) wh
 <!-- Point to docs/adr/ for detailed decisions. Use this section only for a short map of major components and how they talk to each other. -->
 
 See [docs/adr/](docs/adr/) for the reasoning behind major architectural decisions.
+
+## Documentation
+
+When a change needs user-facing or developer-facing documentation (not just code comments), organize it by feature/domain area: `docs/<feature-name>/` rather than by document type. Update docs in the same commit/PR as the code change they describe — don't defer it. See [docs/DOCUMENTATION_GUIDE.md](docs/DOCUMENTATION_GUIDE.md) for the full structure and when a feature earns its own doc vs. a section in an existing one.
 
 ## Keeping this file useful
 

@@ -41,6 +41,8 @@ This is the single most valuable file for AI-assisted development. At minimum, f
 
 See [docs/ai/maintaining-claude-md.md](ai/maintaining-claude-md.md) for how to keep it accurate over time.
 
+Note: `CLAUDE.md` instructs Claude to commit locally on its own after each logically complete change, without waiting to be asked (it still won't push, force-push, or touch CI config without confirmation). If you'd rather review changes before they're committed, edit the "Commit automatically, without being asked" section in `CLAUDE.md` before starting work.
+
 ## 4. Decide on CODEOWNERS
 
 Edit [.github/CODEOWNERS](../.github/CODEOWNERS) or delete it if not needed yet.
