@@ -1,9 +1,18 @@
-# {{PROJECT_NAME}}
+<h1 align="center">{{PROJECT_NAME}}</h1>
 
-> One-sentence description of what this project does and who it's for.
+<p align="center">
+  <em>One-sentence description of what this project does and who it's for.</em><br>
+</p>
 
-[![CI](https://github.com/{{OWNER}}/{{REPO}}/actions/workflows/ci.yml/badge.svg)](https://github.com/{{OWNER}}/{{REPO}}/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/{{OWNER}}/{{REPO}})](LICENSE)
+<p align="center">
+  <img alt="CI" src="https://github.com/{{OWNER}}/{{REPO}}/actions/workflows/ci.yml/badge.svg">
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/{{OWNER}}/{{REPO}}"></a>
+  <!-- Add stack-specific badges here, e.g.:
+  <img alt="Node" src="https://img.shields.io/badge/Node-20-339933?logo=node.js&logoColor=white">
+  -->
+</p>
+
+{{PROJECT_NAME}} is <!-- one or two sentences: what it's based on/for, and the core design/technical choice that defines it -->.
 
 ## Status
 

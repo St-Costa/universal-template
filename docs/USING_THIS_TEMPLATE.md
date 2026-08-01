@@ -30,6 +30,7 @@ This template intentionally ships no language-specific tooling. For your stack:
 - Add real dependency/build files (`package.json`, `pyproject.toml`, `go.mod`, `Cargo.toml`, etc.)
 - Replace the placeholder job in [.github/workflows/ci.yml](../.github/workflows/ci.yml) with real install/lint/test/build steps.
 - Fill in the `Commands` table in [CLAUDE.md](../CLAUDE.md) and the `Getting started` section in [README.md](../README.md).
+- Fill in the README header block: project description, the intro paragraph below the badges, and add any stack-specific badges (language, framework, etc.) alongside the CI/License ones.
 - Uncomment the relevant section of [.gitignore](../.gitignore).
 - Pin real tool versions in [.mise.toml](../.mise.toml) (or delete it if you don't want version pinning).
 - Wire up the placeholder targets in [Makefile](../Makefile) to your real setup/test/lint/build commands — keep them in sync with the `Commands` table in `CLAUDE.md`.
