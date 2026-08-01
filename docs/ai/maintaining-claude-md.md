@@ -19,7 +19,9 @@ Update `CLAUDE.md` in the same PR whenever you:
 
 ## Structure to preserve
 
-Keep the existing section headers (Project overview, Tech stack, Commands, Conventions, Testing expectations, Git & PR conventions, What not to touch, Architecture notes, Documentation, Before considering a task done) so the file stays predictable across projects that use this template. Add sub-sections under them rather than inventing new top-level ones, unless the project genuinely needs a new category.
+Keep the existing section headers (First: check whether this repo is still an unadapted template, Project overview, Tech stack, Commands, Conventions, Testing expectations, Git & PR conventions, What not to touch, Architecture notes, Documentation, Before considering a task done) so the file stays predictable across projects that use this template. Add sub-sections under them rather than inventing new top-level ones, unless the project genuinely needs a new category.
+
+The "First: check whether this repo is still an unadapted template" section should be deleted once the project is adapted (no more `{{TOKEN}}` placeholders anywhere) — it has no purpose after that point and just adds noise to every future session's context.
 
 ## Multiple CLAUDE.md files
 

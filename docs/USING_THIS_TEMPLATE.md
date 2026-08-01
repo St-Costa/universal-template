@@ -2,6 +2,8 @@
 
 Checklist for turning this template into a real project. Delete this file once done.
 
+Claude Code runs this automatically: [CLAUDE.md](../CLAUDE.md) instructs it to detect leftover `{{PLACEHOLDER}}` tokens at the start of a session and offer to work through this checklist before starting on anything else. You can still run it by hand, or just tell Claude your stack and project details and let it drive.
+
 ## 1. Replace placeholders
 
 Search the repo for these tokens and replace them:
@@ -54,6 +56,7 @@ Edit [.github/CODEOWNERS](../.github/CODEOWNERS) or delete it if not needed yet.
 ## 5. Clean up
 
 - Delete this file.
+- Delete the "First: check whether this repo is still an unadapted template" section at the top of [CLAUDE.md](../CLAUDE.md) — once no `{{TOKEN}}` placeholders remain it has nothing left to detect.
 - Delete `src/.gitkeep` and `tests/.gitkeep` once real files exist there.
 - Update the README badge URLs once the repo exists on GitHub with CI configured.
 - If you don't need ADRs, delete `docs/adr/` — but consider keeping [ADR 0001](adr/0001-record-architecture-decisions.md) since it explains why the practice exists.

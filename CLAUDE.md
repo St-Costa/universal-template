@@ -2,6 +2,14 @@
 
 Instructions for Claude Code (and other AI coding agents that read this file) when working in this repository.
 
+## First: check whether this repo is still an unadapted template
+
+Before doing anything else in a new session, check whether this project has been adapted from the template yet: search for unreplaced `{{TOKEN}}` placeholders (`grep -rn '{{[A-Z_]*}}'` across the repo, excluding `.git/`). If any remain — including the one in this file's "Project overview" section below — the repo is still in raw template state.
+
+In that case, **don't just start on the user's request on top of a half-configured repo**. Proactively say so, then offer to run the adaptation now: ask what language/stack, project name, and any other details from [docs/USING_THIS_TEMPLATE.md](docs/USING_THIS_TEMPLATE.md) are needed, and work through that checklist (replace placeholders, wire up `Makefile`/CI/`.mise.toml`/`lefthook.yml` for the chosen stack, fill in this file's own Tech stack and Commands sections). Once no placeholders remain, proceed with what the user actually asked for.
+
+If the user explicitly says to skip adaptation or work around the placeholders as-is, respect that instead.
+
 ## Project overview
 
 <!-- Replace with a short, concrete description: what this project is, who uses it, and what "done" looks like for a typical change. -->
