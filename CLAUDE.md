@@ -48,6 +48,8 @@ If the user explicitly says to skip adaptation or work around the placeholders a
 - No speculative abstractions: build what's asked, not what might be needed later.
 - Keep functions/files close to the size and shape of neighboring code in the same directory.
 - Comment only where the *why* isn't obvious from the code itself.
+- Lean on dependencies already in the project before writing your own implementation or adding a new package; don't assume a library lacks a capability without checking its docs/types first.
+- Prefer established, well-maintained libraries over reimplementing common functionality yourself — but only when doing so actually reduces overall complexity or improves reliability, not by default.
 
 <!-- Add project-specific conventions: naming, error handling patterns, where business logic lives vs. handlers, etc. -->
 
