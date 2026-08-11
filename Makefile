@@ -6,7 +6,7 @@
 # Delete targets that don't apply to this project (e.g. no `build` for a
 # script-only repo); don't leave fake commands behind just to fill the list.
 
-.PHONY: setup dev test test-one lint format build typecheck clean
+.PHONY: setup dev test test-one lint format build typecheck audit clean
 
 setup: ## Install dependencies
 	@echo "TODO: wire up dependency install, e.g. npm ci / poetry install / go mod download"
@@ -28,6 +28,9 @@ format: ## Auto-format the codebase
 
 typecheck: ## Run the type checker
 	@echo "TODO: wire up type-check command"
+
+audit: ## Check dependencies for known vulnerabilities, e.g. npm audit / pip-audit / cargo audit / govulncheck
+	@echo "TODO: wire up dependency security audit command"
 
 build: ## Produce a production build/artifact
 	@echo "TODO: wire up build command"

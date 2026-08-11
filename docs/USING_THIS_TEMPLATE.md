@@ -34,6 +34,7 @@ This template intentionally ships no language-specific tooling. For your stack:
 - Uncomment the relevant section of [.gitignore](../.gitignore).
 - Pin real tool versions in [.mise.toml](../.mise.toml) (or delete it if you don't want version pinning).
 - Wire up the placeholder targets in [Makefile](../Makefile) to your real setup/test/lint/build commands — keep them in sync with the `Commands` table in `CLAUDE.md`.
+- Wire up the `audit` target in [Makefile](../Makefile) to your stack's dependency vulnerability scanner (`npm audit`, `pip-audit`, `cargo audit`, `govulncheck`, `bundler-audit`, etc.), add it as a CI step, and uncomment the `audit` pre-commit hook in [lefthook.yml](../lefthook.yml). See [docs/ai/cicd-security.md](ai/cicd-security.md).
 - Set the base image and `postCreateCommand` in [.devcontainer/devcontainer.json](../.devcontainer/devcontainer.json), or delete `.devcontainer/` if you don't want a containerized dev environment.
 - Uncomment and wire up the `lint`/`format` hooks in [lefthook.yml](../lefthook.yml), then run `lefthook install` once per clone to activate git hooks (gitleaks secret-scanning and commitlint are active by default; both need to be installed locally — see their own docs).
 

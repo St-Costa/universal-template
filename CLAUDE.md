@@ -6,7 +6,7 @@ Instructions for Claude Code (and other AI coding agents that read this file) wh
 
 Before doing anything else in a new session, check whether this project has been adapted from the template yet: search for unreplaced `{{TOKEN}}` placeholders (`grep -rn '{{[A-Z_]*}}'` across the repo, excluding `.git/`). If any remain — including the one in this file's "Project overview" section below — the repo is still in raw template state.
 
-In that case, **don't just start on the user's request on top of a half-configured repo**. Proactively say so, then offer to run the adaptation now: ask what language/stack, project name, and any other details from [docs/USING_THIS_TEMPLATE.md](docs/USING_THIS_TEMPLATE.md) are needed, and work through that checklist (replace placeholders, wire up `Makefile`/CI/`.mise.toml`/`lefthook.yml` for the chosen stack, fill in this file's own Tech stack and Commands sections). Once no placeholders remain, proceed with what the user actually asked for.
+In that case, **don't just start on the user's request on top of a half-configured repo**. Proactively say so, then offer to run the adaptation now: ask what language/stack, project name, and any other details from [docs/USING_THIS_TEMPLATE.md](docs/USING_THIS_TEMPLATE.md) are needed, and work through that checklist (replace placeholders, wire up `Makefile`/CI/`.mise.toml`/`lefthook.yml` for the chosen stack — including the dependency audit tool, see [docs/ai/cicd-security.md](docs/ai/cicd-security.md) — fill in this file's own Tech stack and Commands sections). Once no placeholders remain, proceed with what the user actually asked for.
 
 If the user explicitly says to skip adaptation or work around the placeholders as-is, respect that instead.
 
@@ -40,6 +40,7 @@ If the user explicitly says to skip adaptation or work around the placeholders a
 | Format | `` |
 | Build | `` |
 | Type-check | `` |
+| Dependency audit | `` |
 
 ## Conventions
 
@@ -85,6 +86,20 @@ Write as many tests as are *useful* — which is not the same as as many as poss
 - Flaky tests left in place "for coverage." A flaky test is worse than no test — fix it or delete it.
 
 When in doubt about whether a test is worth writing, ask: *if this broke, would an existing test catch it, and would that failure be useful signal?* If not, write it. If a test wouldn't tell you anything you don't already know, skip it.
+
+## Dependency & supply-chain security
+
+Every new dependency is code you didn't write, running with the same access as the rest of the project. Treat adding or upgrading one as a decision, not a formality:
+
+- Before adding a new dependency, check: is it actively maintained (recent releases, not abandoned), reasonably popular/scrutinized for what it does, and does its permission/access footprint match what the task actually needs? Prefer a well-maintained library already used elsewhere in the project over a new one that does almost the same thing.
+- Before adding **or** upgrading a dependency, run this stack's audit command (see `Dependency audit` in the Commands table — e.g. `npm audit`, `pip-audit`, `cargo audit`, `govulncheck`, `bundler-audit`) and don't introduce a new high/critical finding. If the audit command isn't wired up yet, say so and treat wiring it up as part of adapting the template (see [docs/USING_THIS_TEMPLATE.md](docs/USING_THIS_TEMPLATE.md)) rather than skipping the check silently.
+- Pin dependency versions the way the ecosystem's convention expects (lockfile committed, exact/pinned versions for CI tooling) so installs are reproducible and not silently pulling in a newer, unaudited version.
+- Never pipe a remote script straight into a shell (`curl … | sh`), install from an untrusted/unofficial registry or URL, or add a dependency solely to save writing a few lines of code that don't warrant the added supply-chain surface.
+- If an audit tool flags an existing dependency, don't silently ignore or suppress it — report the finding to the user and propose a fix (upgrade, patch, or documented exception) rather than deciding alone to accept the risk.
+
+This applies to transitive dependencies pulled in incidentally (e.g. via a new direct dependency) just as much as ones added directly.
+
+See [docs/ai/cicd-security.md](docs/ai/cicd-security.md) for the equivalent concerns in CI/CD pipeline configuration (Actions/jobs, not application dependencies).
 
 ## Git & PR conventions
 

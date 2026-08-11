@@ -35,3 +35,6 @@ Before considering a task done, run through this. It consolidates checks that ar
 
 - [ ] No secrets, credentials, or `.env` values in the diff
 - [ ] Input from users/external systems validated at the boundary, not trusted implicitly
+- [ ] New/upgraded dependencies checked for maintenance status and scrutinized before adding ([CLAUDE.md § Dependency & supply-chain security](../../CLAUDE.md#dependency--supply-chain-security))
+- [ ] Dependency audit command run clean (no new high/critical findings) if the diff touches a manifest/lockfile
+- [ ] Any CI/CD workflow changes reviewed against [docs/ai/cicd-security.md](cicd-security.md)

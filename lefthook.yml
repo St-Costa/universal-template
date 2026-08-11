@@ -19,6 +19,9 @@ pre-commit:
     # format:
     #   glob: "*.{js,ts,py,go,rs}"
     #   run: make format
+    # audit:
+    #   glob: "{package.json,package-lock.json,pyproject.toml,poetry.lock,requirements*.txt,go.mod,go.sum,Cargo.toml,Cargo.lock,Gemfile,Gemfile.lock}"
+    #   run: make audit
 
 commit-msg:
   commands:
