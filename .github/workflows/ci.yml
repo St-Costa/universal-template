@@ -12,10 +12,13 @@ jobs:
   # steps for your language/toolchain, then delete this job.
   #
   # Examples:
-  #   Node:   actions/setup-node@v4  -> npm ci -> npm run lint -> npm test
-  #   Python: actions/setup-python@v5 -> pip install -> ruff check -> pytest
-  #   Go:     actions/setup-go@v5    -> go vet ./... -> go test ./...
-  #   Rust:   dtolnay/rust-toolchain  -> cargo clippy -> cargo test
+  #   Node:   actions/setup-node@v4  -> npm ci -> npm run lint -> npm test -> npm audit --audit-level=high
+  #   Python: actions/setup-python@v5 -> pip install -> ruff check -> pytest -> pip-audit
+  #   Go:     actions/setup-go@v5    -> go vet ./... -> go test ./... -> govulncheck ./...
+  #   Rust:   dtolnay/rust-toolchain  -> cargo clippy -> cargo test -> cargo audit
+  #
+  # Include the dependency audit step (`make audit`) as a required check, not
+  # an optional one — see docs/ai/cicd-security.md.
   placeholder:
     name: Placeholder (replace me)
     runs-on: ubuntu-latest
