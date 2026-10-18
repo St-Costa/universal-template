@@ -30,6 +30,7 @@ Before considering a task done, run through this. It consolidates checks that ar
 - [ ] Change is logically complete and working — not a partial step ([CLAUDE.md § Commit automatically](../../CLAUDE.md#commit-automatically-without-being-asked))
 - [ ] Staged changes reviewed (`git status`/`git diff`) — no unrelated files, no secrets
 - [ ] Commit message follows the project's format
+- [ ] Two-way-door decisions taken along the way are reported to the user; no one-way door crossed without the user's approval ([CLAUDE.md § Autonomy](../../CLAUDE.md#autonomy-two-way-doors-swing-freely))
 
 ## Security
 

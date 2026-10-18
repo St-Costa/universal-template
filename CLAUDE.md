@@ -54,6 +54,16 @@ If the user explicitly says to skip adaptation or work around the placeholders a
 
 <!-- Add project-specific conventions: naming, error handling patterns, where business logic lives vs. handlers, etc. -->
 
+## Autonomy: two-way doors swing freely
+
+Walk through two-way doors and show the user after. Stop at one-way doors. If the user's answer would be a rubber stamp, don't ask. If running something could answer the question, run it instead. Save questions for taste and product calls only the user can make — one at a time, with your recommendation, using the harness's built-in question tool if it has one (e.g. `AskUserQuestion` in Claude Code). "No" is an acceptable answer too.
+
+Once the user opens a one-way door, it stays open for that work, including for any subagent you hand it to — pass the approval along by quoting the user verbatim. Come back only if the door turns out to be different from the one that was opened: more at stake than the user was told, a check failing, something they didn't know about.
+
+- **Two-way door** — a decision you can walk back through: code, branches, PRs, test data, dev infra.
+- **One-way door** — one you can't: prod data, deploys to users, force-pushing a shared branch, deleting what you didn't make, a message sent to another person. In this repo, everything under [What not to touch without asking](#what-not-to-touch-without-asking) is also treated as a one-way door, even where it's technically reversible.
+- **Rubber stamp** — a question whose only sensible answer is yes. Asking it costs the user a round trip and teaches nothing.
+
 ## Testing expectations
 
 - New behavior needs a test. Bug fixes need a regression test.
@@ -105,7 +115,7 @@ See [docs/ai/cicd-security.md](docs/ai/cicd-security.md) for the equivalent conc
 
 ### Commit automatically, without being asked
 
-In this repository, committing is part of finishing a unit of work — you do not need explicit permission to run `git commit`, and you should not wait to be told. This overrides the general default of only committing when asked.
+In this repository, committing is part of finishing a unit of work — you do not need explicit permission to run `git commit`, and you should not wait to be told. This overrides the general default of only committing when asked. A local commit is a two-way door ([Autonomy](#autonomy-two-way-doors-swing-freely)); pushing to or rewriting a shared branch is not.
 
 - **When to commit**: after each logically complete, working change — a bug fixed, a feature/sub-feature working, a refactor landed, docs updated to match a code change. Don't commit broken or half-finished work; don't bundle unrelated changes into one commit; don't wait for an entire multi-step task to finish if it contains several independent complete steps along the way.
 - **What to do instead of asking first**: commit, then tell the user what you committed and why, in one line (e.g. "Committed as `abc1234`: fix null check in parser"). Report after, don't ask before.

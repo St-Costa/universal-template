@@ -6,7 +6,7 @@ Practical guidance for how agents (Claude Code or otherwise) should operate here
 
 1. Read `CLAUDE.md` for commands and conventions.
 2. Check [docs/adr/](../adr/) if the task touches architecture — don't relitigate a decision that's already recorded there without flagging it explicitly.
-3. For anything non-trivial (new dependency, schema change, new external service, cross-cutting refactor), propose a short plan before writing code.
+3. For anything non-trivial (new dependency, schema change, new external service, cross-cutting refactor), state a short plan before writing code. If every step is a two-way door, proceed without waiting for approval; stop only for one-way doors and taste/product calls ([CLAUDE.md § Autonomy](../../CLAUDE.md#autonomy-two-way-doors-swing-freely)).
 
 ## While working
 
@@ -22,4 +22,6 @@ Practical guidance for how agents (Claude Code or otherwise) should operate here
 
 ## Escalation
 
-If a task requires a decision only a human can make (ambiguous requirements, a tradeoff with real user-facing consequences, anything destructive/irreversible), stop and ask rather than guessing.
+Follow [CLAUDE.md § Autonomy](../../CLAUDE.md#autonomy-two-way-doors-swing-freely): walk through two-way doors and report after; stop at one-way doors (anything destructive/irreversible) and at taste/product calls only a human can make (ambiguous requirements, a tradeoff with real user-facing consequences). Don't ask rubber-stamp questions, and don't ask what running something could answer.
+
+When delegating to a subagent, pass along any one-way door the user already opened by quoting their approval verbatim, so the subagent doesn't re-ask or overstep it.
