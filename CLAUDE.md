@@ -97,6 +97,17 @@ Write as many tests as are *useful* — which is not the same as as many as poss
 
 When in doubt about whether a test is worth writing, ask: *if this broke, would an existing test catch it, and would that failure be useful signal?* If not, write it. If a test wouldn't tell you anything you don't already know, skip it.
 
+## Implicit state machines
+
+State spread across independent flags, nullable fields, or loosely-related enums is an implicit state machine. It lets impossible states exist (`isLoading && isError`), scatters transition rules across callers, and hides bugs in retry/cancel/timeout/partial-failure paths. Prefer one explicit state value — enum, discriminated union, sealed class, status column — with named states and transitions owned by one function.
+
+- **Check on every commit.** Any change that touches stateful behavior (a lifecycle, status, wizard, request, job, upload, payment, entity with phases) gets a detection pass before it is staged. This is part of the self-review in [docs/ai/review-checklist.md](docs/ai/review-checklist.md); the heuristics are in [docs/ai/implicit-state-machines.md](docs/ai/implicit-state-machines.md).
+- **Fix what you touch.** If your change adds to or edits an implicit machine, either migrate it to an explicit state in the same change or record it in [docs/state-machines/README.md](docs/state-machines/README.md) with why it was left as-is. Do not silently add another flag.
+- **One source of truth.** Derive booleans (`isLoading = state === 'loading'`) instead of storing them; attach data to the state that owns it so illegal combinations cannot be constructed.
+- **Centralize transitions.** One function/reducer owns `(state, event) -> state`; invalid transitions fail loudly instead of silently no-op.
+- **Don't over-model.** A single local boolean, or a two-state flag that never interacts with other state, is fine. The threshold is in the full guide.
+- **Record identified machines** in [docs/state-machines/README.md](docs/state-machines/README.md), including ones deliberately left implicit (`deferred`, with a reason).
+
 ## Dependency & supply-chain security
 
 Every new dependency is code you didn't write, running with the same access as the rest of the project. Treat adding or upgrading one as a decision, not a formality:
@@ -121,6 +132,7 @@ In this repository, committing is part of finishing a unit of work — you do no
 - **What to do instead of asking first**: commit, then tell the user what you committed and why, in one line (e.g. "Committed as `abc1234`: fix null check in parser"). Report after, don't ask before.
 - **Scope stays local**: this permission covers local commits only. Never push, force-push, rebase published history, or amend an existing commit without being explicitly asked — those remain confirm-first actions per the repo's normal safety rules.
 - **Staging discipline still applies**: review what's staged before committing (`git status`/`git diff`), stage specific files rather than `git add -A`/`.` when unrelated changes are present, and check for secrets before committing anything that looks like it might contain them.
+- **State check before committing**: if the staged diff touches stateful behavior, run the pass in [docs/ai/implicit-state-machines.md](docs/ai/implicit-state-machines.md) — migrate what's in scope or record it in [docs/state-machines/README.md](docs/state-machines/README.md).
 - **Exceptions** — do not auto-commit:
   - Mid-edit or exploratory work that doesn't yet build/pass tests.
   - Changes to `.github/workflows/`, other CI/CD config, or anything else listed under "What not to touch without asking" below — confirm first even for a commit.
@@ -168,7 +180,7 @@ When a change needs user-facing or developer-facing documentation (not just code
 
 ## Before considering a task done
 
-Run through [docs/ai/review-checklist.md](docs/ai/review-checklist.md) — it consolidates the checks scattered across this file into one pass.
+Run through [docs/ai/review-checklist.md](docs/ai/review-checklist.md) — it consolidates the checks scattered across this file into one pass, including the implicit state machine check.
 
 ## Keeping this file useful
 

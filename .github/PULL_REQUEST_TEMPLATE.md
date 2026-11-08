@@ -18,5 +18,6 @@
 
 - [ ] Tests added/updated for the change
 - [ ] `CLAUDE.md` updated if commands/conventions changed
+- [ ] State modeling checked: no new implicit state machine; found ones migrated or recorded in `docs/state-machines/README.md`
 - [ ] No secrets or credentials included
 - [ ] Linked issue (if applicable)

@@ -11,6 +11,7 @@ Practical guidance for how agents (Claude Code or otherwise) should operate here
 ## While working
 
 - Run the project's real test suite and lint/type-check commands from `CLAUDE.md` before calling a task done — don't just eyeball the diff.
+- When touching stateful behavior, check for an implicit state machine before adding another flag ([docs/ai/implicit-state-machines.md](implicit-state-machines.md)). If you find one outside the task's scope, record it in [docs/state-machines/README.md](../state-machines/README.md) rather than silently expanding the diff.
 - Keep changes scoped to the task. If you notice an unrelated issue, mention it rather than fixing it inline.
 - If a command in `CLAUDE.md` is wrong or missing, fix the doc as part of your change.
 

@@ -55,6 +55,7 @@ A [devcontainer](.devcontainer/devcontainer.json) is available for a reproducibl
 ├── docs/                 # project documentation
 │   ├── adr/               # architecture decision records
 │   ├── ai/                 # instructions and context for AI coding agents
+│   ├── state-machines/      # inventory of explicit/implicit state machines
 │   ├── DOCUMENTATION_GUIDE.md
 │   └── RUNBOOK.md           # operational playbook (fill in once deployed)
 ├── src/                    # application/library source (create per-language)
@@ -74,6 +75,8 @@ A [devcontainer](.devcontainer/devcontainer.json) is available for a reproducibl
 - [docs/adr/](docs/adr/) — why key decisions were made
 - [docs/DOCUMENTATION_GUIDE.md](docs/DOCUMENTATION_GUIDE.md) — how feature docs are organized
 - [docs/RUNBOOK.md](docs/RUNBOOK.md) — operating this project once deployed
+- [docs/state-machines/](docs/state-machines/) — inventory of state machines, including implicit ones identified for migration
+- [docs/ai/implicit-state-machines.md](docs/ai/implicit-state-machines.md) — how to spot and fix implicit state machines
 - [CLAUDE.md](CLAUDE.md) — how AI agents should work in this repo
 
 ## License

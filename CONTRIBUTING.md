@@ -15,9 +15,10 @@ See [README.md](README.md#getting-started).
 
 1. Create a branch: `git checkout -b feature/short-description` (or `fix/...`).
 2. Make your change, following the conventions in [CLAUDE.md](CLAUDE.md).
-3. Add or update tests.
-4. Run the full test suite and lint/format/type-check commands (see [CLAUDE.md](CLAUDE.md#commands)) before opening a PR.
-5. Update `CLAUDE.md` and/or `README.md` if you changed a command, convention, or the project structure.
+3. If the change touches stateful behavior, run the implicit state machine pass ([docs/ai/implicit-state-machines.md](docs/ai/implicit-state-machines.md)) and record identified machines in [docs/state-machines/README.md](docs/state-machines/README.md).
+4. Add or update tests.
+5. Run the full test suite and lint/format/type-check commands (see [CLAUDE.md](CLAUDE.md#commands)) before opening a PR.
+6. Update `CLAUDE.md` and/or `README.md` if you changed a command, convention, or the project structure.
 
 ## Commit messages
 
@@ -33,6 +34,7 @@ See [README.md](README.md#getting-started).
 ## Code review
 
 - Reviewers: focus on correctness, security, and maintainability, not style nitpicks the linter should catch.
+- Reviewers: check stateful changes for implicit state machines — one explicit state, centralized transitions, no new co-varying flag ([docs/ai/implicit-state-machines.md](docs/ai/implicit-state-machines.md)).
 - Authors: respond to every comment, either with a change or a reason you're not making it.
 
 ## Reporting bugs / requesting features

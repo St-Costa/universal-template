@@ -20,6 +20,8 @@ docs/
 
 Rationale: as a project grows, "where do I document X" should map to "where does X live conceptually," which is how both users and agents already navigate the codebase. A type-based split (guides/reference/concepts) forces every feature's story across three folders and tends to rot faster because updating a feature means remembering to touch three places instead of one.
 
+Cross-cutting inventories that are not a feature — e.g. [state-machines/](state-machines/) for the state-machine registry — get their own top-level folder named for the concept, so there is one obvious place to look.
+
 ## What goes in a feature doc
 
 A feature doc (`docs/<feature-name>/README.md`) should cover, roughly in this order:

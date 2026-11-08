@@ -8,6 +8,12 @@ Before considering a task done, run through this. It consolidates checks that ar
 - [ ] Matches the style of surrounding code, not an external style guide
 - [ ] No leftover debug prints, commented-out code, or TODOs without an issue reference
 
+## State modeling
+
+- [ ] Changed stateful behavior is carried by one explicit state value; no new co-varying boolean/field was added ([CLAUDE.md § Implicit state machines](../../CLAUDE.md#implicit-state-machines), [guide](implicit-state-machines.md))
+- [ ] No illegal state is representable; transitions live in one function and booleans are derived from state
+- [ ] Any implicit machine found in scope is migrated, or recorded in [docs/state-machines/README.md](../state-machines/README.md) with a next step or a `deferred` reason; the registry is updated for machines identified, migrated, or removed
+
 ## Tests
 
 - [ ] New behavior has a test; bug fixes have a regression test ([CLAUDE.md § Testing philosophy](../../CLAUDE.md#testing-philosophy))

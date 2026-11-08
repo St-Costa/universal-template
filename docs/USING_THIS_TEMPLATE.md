@@ -51,21 +51,31 @@ See [docs/ai/maintaining-claude-md.md](ai/maintaining-claude-md.md) for how to k
 
 Note: `CLAUDE.md` instructs Claude to commit locally on its own after each logically complete change, without waiting to be asked (it still won't push, force-push, or touch CI config without confirmation). If you'd rather review changes before they're committed, edit the "Commit automatically, without being asked" section in `CLAUDE.md` before starting work.
 
-## 4. Decide on CODEOWNERS
+## 4. Keep the state machine practice
+
+The template ships a standing rule for [implicit state machines](ai/implicit-state-machines.md): any change touching stateful behavior gets a detection pass before commit, and identified machines are tracked in [docs/state-machines/README.md](state-machines/README.md).
+
+- Replace the example rows in the registry with your project's machines (or leave the table empty until the first one is found).
+- Keep the `Implicit state machines` section in [CLAUDE.md](../CLAUDE.md) and the matching items in [docs/ai/review-checklist.md](ai/review-checklist.md) — they are the enforcement, not optional reading.
+- Optionally add a stack-specific lint rule for your most common smell (e.g. a rule against parallel status flags). Don't add a generic grep hook: it is too noisy to survive.
+- If the project has no stateful behavior at all (a pure library, a static site), you can drop the practice: delete the registry, this guide, and the `CLAUDE.md` section, and mark ADR 0002 deprecated.
+
+## 5. Decide on CODEOWNERS
 
 Edit [.github/CODEOWNERS](../.github/CODEOWNERS) or delete it if not needed yet.
 
-## 5. Clean up
+## 6. Clean up
 
 - Delete this file.
 - Delete the "First: check whether this repo is still an unadapted template" section at the top of [CLAUDE.md](../CLAUDE.md) — once no `{{TOKEN}}` placeholders remain it has nothing left to detect.
 - Delete `src/.gitkeep` and `tests/.gitkeep` once real files exist there.
 - Update the README badge URLs once the repo exists on GitHub with CI configured.
-- If you don't need ADRs, delete `docs/adr/` — but consider keeping [ADR 0001](adr/0001-record-architecture-decisions.md) since it explains why the practice exists.
+- If you don't need ADRs, delete `docs/adr/` — but consider keeping [ADR 0001](adr/0001-record-architecture-decisions.md) since it explains why the practice exists, and [ADR 0002](adr/0002-track-implicit-state-machines.md) if you kept the state machine practice.
 - Fill in [docs/RUNBOOK.md](RUNBOOK.md) once something is actually deployed — it's placeholder-only until then. Delete it if this project will never be operated as a live service (e.g. a library).
 - Delete `docs/ai/examples/` — it's a worked example, not something meant to ship in a real project.
+- Remove the example rows from [docs/state-machines/README.md](state-machines/README.md) — keep the registry and its instructions.
 
-## 6. First commit
+## 7. First commit
 
 Reset history so the new project doesn't inherit template commits (optional, but common):
 
